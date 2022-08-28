@@ -1,4 +1,4 @@
-// c++20
+п»ї// c++20
 
 #include <iostream>
 
@@ -64,56 +64,56 @@ int main()
 	int serviceReqCcounter(0);
 	while (std::cin >> time >> userId)
 	{
-		// ------- Проверка условий -------
+		// ------- РџСЂРѕРІРµСЂРєР° СѓСЃР»РѕРІРёР№ -------
 
 		if (usersState.contains(userId))
 		{
-			if (usersState[userId].reqCounter - list_analyzer(usersState[userId].reqStatistics, duration, time) == userLimit)	// Проверка на превышение пользователем лимита запросов с учётом наступившего тайминга (list_analyzer)
+			if (usersState[userId].reqCounter - list_analyzer(usersState[userId].reqStatistics, duration, time) == userLimit)	// РџСЂРѕРІРµСЂРєР° РЅР° РїСЂРµРІС‹С€РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј Р»РёРјРёС‚Р° Р·Р°РїСЂРѕСЃРѕРІ СЃ СѓС‡С‘С‚РѕРј РЅР°СЃС‚СѓРїРёРІС€РµРіРѕ С‚Р°Р№РјРёРЅРіР° (list_analyzer)
 			{
 				std::cout << "429\n";
 				continue;
 			}
 		}
 
-		if (serviceReqCcounter - list_analyzer(serviceState, duration, time) == serviceLimit)	// Проверка на превышение лимитов запросов к сервису с учётом наступившего тайминга (list_analyzer)
+		if (serviceReqCcounter - list_analyzer(serviceState, duration, time) == serviceLimit)	// РџСЂРѕРІРµСЂРєР° РЅР° РїСЂРµРІС‹С€РµРЅРёРµ Р»РёРјРёС‚РѕРІ Р·Р°РїСЂРѕСЃРѕРІ Рє СЃРµСЂРІРёСЃСѓ СЃ СѓС‡С‘С‚РѕРј РЅР°СЃС‚СѓРїРёРІС€РµРіРѕ С‚Р°Р№РјРёРЅРіР° (list_analyzer)
 		{
 			std::cout << "503\n";
 			continue;
 		}
 
-		// ------- Обработка данных о запросах пользователя -------
+		// ------- РћР±СЂР°Р±РѕС‚РєР° РґР°РЅРЅС‹С… Рѕ Р·Р°РїСЂРѕСЃР°С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ -------
 
-		if (usersState.contains(userId))	// Если пользователь уже есть в списке
+		if (usersState.contains(userId))	// Р•СЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓР¶Рµ РµСЃС‚СЊ РІ СЃРїРёСЃРєРµ
 		{
-			if (usersState[userId].reqStatistics.back().first != time)	// Если новый тайминг
+			if (usersState[userId].reqStatistics.back().first != time)	// Р•СЃР»Рё РЅРѕРІС‹Р№ С‚Р°Р№РјРёРЅРі
 			{
-				usersState[userId].reqStatistics.push_back(std::pair(time, 1));	// Добавляем тайминг
-				usersState[userId].reqCounter -= list_format(usersState[userId].reqStatistics, duration);	// Обновляем счетчик обращений (стирая неактуальные данные устаревших обращений)
+				usersState[userId].reqStatistics.push_back(std::pair(time, 1));	// Р”РѕР±Р°РІР»СЏРµРј С‚Р°Р№РјРёРЅРі
+				usersState[userId].reqCounter -= list_format(usersState[userId].reqStatistics, duration);	// РћР±РЅРѕРІР»СЏРµРј СЃС‡РµС‚С‡РёРє РѕР±СЂР°С‰РµРЅРёР№ (СЃС‚РёСЂР°СЏ РЅРµР°РєС‚СѓР°Р»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ СѓСЃС‚Р°СЂРµРІС€РёС… РѕР±СЂР°С‰РµРЅРёР№)
 			}
 			else
 			{
-				++usersState[userId].reqStatistics.back().second;	// иначе плюсуем существущий
+				++usersState[userId].reqStatistics.back().second;	// РёРЅР°С‡Рµ РїР»СЋСЃСѓРµРј СЃСѓС‰РµСЃС‚РІСѓС‰РёР№
 			}
 		}
-		else	// иначе добавляем пользователя + инициализируем его тайминг
+		else	// РёРЅР°С‡Рµ РґРѕР±Р°РІР»СЏРµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ + РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РµРіРѕ С‚Р°Р№РјРёРЅРі
 		{
 			usersState[userId] = userData{};
 			usersState[userId].reqStatistics.push_back(std::pair<int, int>(time, 1));
 		}
-		++usersState[userId].reqCounter;	// Префиксный инкремент актуальных таймингов запросов пользователя
+		++usersState[userId].reqCounter;	// РџСЂРµС„РёРєСЃРЅС‹Р№ РёРЅРєСЂРµРјРµРЅС‚ Р°РєС‚СѓР°Р»СЊРЅС‹С… С‚Р°Р№РјРёРЅРіРѕРІ Р·Р°РїСЂРѕСЃРѕРІ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 
-		// ------- Обработка данных о всех запросах в сервис -------
+		// ------- РћР±СЂР°Р±РѕС‚РєР° РґР°РЅРЅС‹С… Рѕ РІСЃРµС… Р·Р°РїСЂРѕСЃР°С… РІ СЃРµСЂРІРёСЃ -------
 
-		if (serviceState.back().first != time)	// Если новый тайминг
+		if (serviceState.back().first != time)	// Р•СЃР»Рё РЅРѕРІС‹Р№ С‚Р°Р№РјРёРЅРі
 		{
 			serviceState.push_back(std::pair(time, 1));
 			serviceReqCcounter -= list_format(serviceState, duration);
 		}
 		else
 		{
-			++serviceState.back().second;	// иначе плюсуем существущий
+			++serviceState.back().second;	// РёРЅР°С‡Рµ РїР»СЋСЃСѓРµРј СЃСѓС‰РµСЃС‚РІСѓС‰РёР№
 		}
-		++serviceReqCcounter;	// Префиксный инкремент актуальных таймингов запросов на сервис
+		++serviceReqCcounter;	// РџСЂРµС„РёРєСЃРЅС‹Р№ РёРЅРєСЂРµРјРµРЅС‚ Р°РєС‚СѓР°Р»СЊРЅС‹С… С‚Р°Р№РјРёРЅРіРѕРІ Р·Р°РїСЂРѕСЃРѕРІ РЅР° СЃРµСЂРІРёСЃ
 		
 		std::cout << "200\n";
 	}
