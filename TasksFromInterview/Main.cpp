@@ -1,4 +1,4 @@
-// Потенциальные задачи с интервью
+// РџРѕС‚РµРЅС†РёР°Р»СЊРЅС‹Рµ Р·Р°РґР°С‡Рё СЃ РёРЅС‚РµСЂРІСЊСЋ
 
 #include <iostream>
 #include <string>
@@ -17,7 +17,7 @@ struct ListNode {
 	ListNode(int val, ListNode* next) : val(val), next(next) {}
 };
 
-ListNode* ReverseList(const ListNode* const head)	// Развернуть список (с созданием копии)
+ListNode* ReverseList(const ListNode* const head)	// Р Р°Р·РІРµСЂРЅСѓС‚СЊ СЃРїРёСЃРѕРє (СЃ СЃРѕР·РґР°РЅРёРµРј РєРѕРїРёРё)
 {
 	const ListNode* iterator = head->next;
 	ListNode* last = new ListNode(head->val);
@@ -30,7 +30,7 @@ ListNode* ReverseList(const ListNode* const head)	// Развернуть список (с создан
 	return last;
 }
 
-ListNode* ReverseListNoCopy(ListNode* head)	// Развернуть список (без создания копии)
+ListNode* ReverseListNoCopy(ListNode* head)	// Р Р°Р·РІРµСЂРЅСѓС‚СЊ СЃРїРёСЃРѕРє (Р±РµР· СЃРѕР·РґР°РЅРёСЏ РєРѕРїРёРё)
 {
 	ListNode* iterator = head;
 	ListNode* prev = nullptr;
@@ -51,7 +51,7 @@ ListNode* ReverseListNoCopy(ListNode* head)	// Развернуть список (без создания к
 	return prev;
 }
 
-void outputList(const ListNode const* const head)	// Вывод списка в консоль
+void outputList(const ListNode const* const head)	// Р’С‹РІРѕРґ СЃРїРёСЃРєР° РІ РєРѕРЅСЃРѕР»СЊ
 {
 	const ListNode* it = head;
 
@@ -62,7 +62,7 @@ void outputList(const ListNode const* const head)	// Вывод списка в консоль
 	cout << endl;
 }
 
-int32_t binSearch(const std::vector<int>& data, int key)	// Бинарный поиск самого первого вхождения ключа
+int32_t binSearch(const std::vector<int>& data, int key)	// Р‘РёРЅР°СЂРЅС‹Р№ РїРѕРёСЃРє СЃР°РјРѕРіРѕ РїРµСЂРІРѕРіРѕ РІС…РѕР¶РґРµРЅРёСЏ РєР»СЋС‡Р°
 {
 	int32_t left(0), right(data.size() - 1), index(0);
 	int elem;
@@ -112,7 +112,7 @@ struct TreeNode {
 
 bool isSameTree(const TreeNode* const p, const TreeNode* const q)
 {
-	if (p == nullptr && q == nullptr)	// В начале обрабатываем условия прекращения рекурсии
+	if (p == nullptr && q == nullptr)	// Р’ РЅР°С‡Р°Р»Рµ РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј СѓСЃР»РѕРІРёСЏ РїСЂРµРєСЂР°С‰РµРЅРёСЏ СЂРµРєСѓСЂСЃРёРё
 	{
 		return true;
 	}
@@ -169,7 +169,7 @@ void outputBitsNum(const uint32_t num)
 
 int main()
 {
-	// Задача развернуть список
+	// Р—Р°РґР°С‡Р° СЂР°Р·РІРµСЂРЅСѓС‚СЊ СЃРїРёСЃРѕРє
 
 	/*ListNode* first = new ListNode(12);
 	ListNode* second = new ListNode(15);
@@ -181,7 +181,7 @@ int main()
 	outputList(ReverseListNoCopy(first));*/
 
 
-	// Задача найти первое вхождение значения при помощи бинарного поиска
+	// Р—Р°РґР°С‡Р° РЅР°Р№С‚Рё РїРµСЂРІРѕРµ РІС…РѕР¶РґРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РїСЂРё РїРѕРјРѕС‰Рё Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР°
 
 	/*std::vector data = { 1, 2, 3, 4, 5, 6 };
 	std::sort(data.begin(), data.end());
@@ -202,7 +202,7 @@ int main()
 	cout << binSearch(data, 7) << endl;*/
 
 
-	// Задача сравнить деревья
+	// Р—Р°РґР°С‡Р° СЃСЂР°РІРЅРёС‚СЊ РґРµСЂРµРІСЊСЏ
 
 	TreeNode* first_1 = new TreeNode(13);
 	TreeNode* first_2 = new TreeNode(14);
