@@ -1,6 +1,7 @@
 // Потенциальные задачи с интервью
 
 #include <iostream>
+#include <string>
 #include <vector>
 #include <algorithm>
 
@@ -125,6 +126,47 @@ bool isSameTree(const TreeNode* const p, const TreeNode* const q)
 
 }
 
+string markChar(const string& str, const char c)
+{
+	string res;
+	res.reserve(str.size());
+
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (str[i] == c)
+		{
+			res += "\\";
+		}
+
+		res += str[i];
+	}
+
+	return res;
+	//return {};
+}
+
+uint32_t setBit(uint32_t num, uint32_t index, uint32_t bitValue)
+{
+	if ((num >> index) & 1)
+	{
+		num = num & (bitValue << index);
+	}
+	else
+	{
+		num = num | (bitValue << index);
+	}
+
+	return num;
+}
+
+void outputBitsNum(const uint32_t num)
+{
+	for (int i = 8 * sizeof(uint32_t) - 1; i >= 0; --i)
+	{
+		cout << ((num >> i) & 1);
+	}
+}
+
 int main()
 {
 	// Задача развернуть список
@@ -173,6 +215,17 @@ int main()
 	TreeNode* second = new TreeNode(16, second_1, second_2);
 
 	cout << isSameTree(first, second) << endl;
+
+	uint32_t num = 8;
+	cout << num << "(";
+	outputBitsNum(num);
+	cout << ")" << endl;
+
+	num = setBit(num, 3, 0);
+	num = setBit(num, 4, 1);
+	cout << num << "(";
+	outputBitsNum(num);
+	cout << ")" << endl;
 
 	return 0;
 }
